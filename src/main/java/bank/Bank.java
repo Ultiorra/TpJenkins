@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Bank {
 
-    List<Account> accounts;
+    private List<Account> accounts;
 
     public Bank(List<Account> accounts) {
         this.accounts = accounts;
@@ -15,7 +15,12 @@ public class Bank {
     }
 
     public void removeAccount(Account account) {
-        this.accounts.remove(account);
+        for (Account a : this.accounts) {
+            if (a.getId() == account.getId()) {
+                this.accounts.remove(a);
+                break;
+            }
+        }
     }
 
     public void showBalance() {
@@ -27,5 +32,15 @@ public class Bank {
     public void transfer(Account account1, Account account2, int amount) {
         account1.debit(amount);
         account2.credit(amount);
+    }
+
+
+    public Account getAccount(int id) {
+        for (Account account : this.accounts) {
+            if (account.getId() == id) {
+                return account;
+            }
+        }
+        return null;
     }
 }

@@ -11,12 +11,18 @@ public class Delivery {
     /**
      * Constructor for objects of class Delivery
      */
-    private Delivery() {
+    public Delivery() {
         // initialise instance variables
     }
     public static double calculateCost(double distance, double weight) {
         double cost = 0.0;
 
+        if (distance < 0.0) {
+            throw new IllegalArgumentException("Distance cannot be negative");
+        }
+        if (weight < 0.0) {
+            throw new IllegalArgumentException("Weight cannot be negative");
+        }
         if (distance <= 50.0) {
             cost += STANDARD_COST;
         } else {
